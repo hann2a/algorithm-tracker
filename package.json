@@ -1,0 +1,13 @@
+
+{
+  "name": "algorithm-tracker",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tailwindcss -i ./assets/css/index.css -o ./assets/css/output.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1",
+    "postcss": "^8.4.30",
+    "autoprefixer": "^10.4.17"
+  }
+}

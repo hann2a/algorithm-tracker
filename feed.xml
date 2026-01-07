@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/algorithm-tracker/feed.xml" rel="self" type="application/atom+xml" /><link href="/algorithm-tracker/" rel="alternate" type="text/html" /><updated>2026-01-07T04:03:42+00:00</updated><id>/algorithm-tracker/feed.xml</id><title type="html">Algorithm Tracker</title><entry><title type="html">[백준 1234] 배열 회전</title><link href="/algorithm-tracker/2026/01/07/array-rotation.html" rel="alternate" type="text/html" title="[백준 1234] 배열 회전" /><published>2026-01-07T00:00:00+00:00</published><updated>2026-01-07T00:00:00+00:00</updated><id>/algorithm-tracker/2026/01/07/array-rotation</id><content type="html" xml:base="/algorithm-tracker/2026/01/07/array-rotation.html"><![CDATA[<h2 id="-링크">🔗 링크</h2>
+<p><a href="https://boj.kr/1234">문제 보러가기</a></p>
+
+<h2 id="-요약">📝 요약</h2>
+<p>배열을 시계 방향으로 회전시키는 구현 문제. deque를 써서 풀었다.</p>
+
+<h2 id="-코드">💻 코드</h2>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+<span class="k">def</span> <span class="nf">rotate</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+    <span class="n">d</span><span class="p">.</span><span class="nf">rotate</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nf">list</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</code></pre></div></div>]]></content><author><name></name></author><summary type="html"><![CDATA[🔗 링크 문제 보러가기]]></summary></entry></feed>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <!-- _includes/head.html -->
+
+<!-- Tailwind Build Output CSS -->
+<link rel="stylesheet" href="/algorithm-tracker/assets/css/output.css">
+
+<!-- Pretendard 폰트 or 기타 웹폰트 -->
+<link rel="stylesheet" href="/algorithm-tracker/assets/css/fonts.css">
+
+  </head>
+  <body class="flex min-h-screen bg-gray-50">
+    <aside class="fixed left-0 top-0 h-screen w-64 bg-white border-r border-gray-200 flex flex-col p-6">
+  <div class="mb-12">
+    <h1 class="text-xl font-medium text-gray-900">AlgoTracker</h1>
+  </div>
+  <nav class="flex flex-col gap-2">
+    <a href="/algorithm-tracker/" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100">
+      <span>🏠</span> Home
+    </a>
+    <a href="/algorithm-tracker/all" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100">
+      <span>📅</span> All
+    </a>
+    <a href="/algorithm-tracker/about" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100">
+      <span>ℹ️</span> About
+    </a>
+  </nav>
+</aside>
+
+    <main class="flex-1 p-6 ml-64">
+      <h2 class="text-2xl font-semibold mb-6">📅 이번 달 알고리즘 기록</h2>
+
+<!-- _includes/calendar.html -->
+<div class="text-gray-500 text-sm text-center">
+  <p>This is a placeholder calendar.</p>
+</div>
+
+
+    </main>
+  </body>
+</html>

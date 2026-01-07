@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>[백준 1234] 배열 회전</title>
+    <!-- _includes/head.html -->
+
+<!-- Tailwind Build Output CSS -->
+<link rel="stylesheet" href="/algorithm-tracker/assets/css/output.css">
+
+<!-- Pretendard 폰트 or 기타 웹폰트 -->
+<link rel="stylesheet" href="/algorithm-tracker/assets/css/fonts.css">
+
+  </head>
+  <body class="flex min-h-screen bg-gray-50">
+    <aside class="fixed left-0 top-0 h-screen w-64 bg-white border-r border-gray-200 flex flex-col p-6">
+  <div class="mb-12">
+    <h1 class="text-xl font-medium text-gray-900">AlgoTracker</h1>
+  </div>
+  <nav class="flex flex-col gap-2">
+    <a href="/algorithm-tracker/" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100">
+      <span>🏠</span> Home
+    </a>
+    <a href="/algorithm-tracker/all" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100">
+      <span>📅</span> All
+    </a>
+    <a href="/algorithm-tracker/about" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-100">
+      <span>ℹ️</span> About
+    </a>
+  </nav>
+</aside>
+
+    <main class="flex-1 p-6 ml-64">
+      <article class="prose max-w-3xl">
+  <h1>[백준 1234] 배열 회전</h1>
+  <p class="text-sm text-gray-500">2026-01-07 · 구현</p>
+  <p><a href="https://boj.kr/1234" class="text-blue-600 underline">🔗 문제 링크</a></p>
+  <h2 id="-링크">🔗 링크</h2>
+<p><a href="https://boj.kr/1234">문제 보러가기</a></p>
+
+<h2 id="-요약">📝 요약</h2>
+<p>배열을 시계 방향으로 회전시키는 구현 문제. deque를 써서 풀었다.</p>
+
+<h2 id="-코드">💻 코드</h2>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+<span class="k">def</span> <span class="nf">rotate</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+    <span class="n">d</span><span class="p">.</span><span class="nf">rotate</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nf">list</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</code></pre></div></div>
+
+</article>
+    </main>
+  </body>
+</html>
