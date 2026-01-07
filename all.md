@@ -11,9 +11,8 @@ permalink: /all/
     {% assign posts_by_month = site.posts | group_by_exp: "post", "post.date | date: '%Y-%m'" %}
     {% for month in posts_by_month %}
       {% assign year = month.name | split: "-" | first %}
-      {% assign month_num = month.name | split: "-" | last | plus: 0 %}
-      {% assign month_names = "January,February,March,April,May,June,July,August,September,October,November,December" | split: "," %}
-      {% assign month_name = month_names[month_num | minus: 1] %}
+      {% assign first_post = month.items | first %}
+      {% assign month_name = first_post.date | date: "%B" %}
       
       <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
         <h3 class="text-xl font-bold text-gray-900 mb-6">{{ month_name }} {{ year }}</h3>
