@@ -45,6 +45,14 @@ permalink: /about/
     </section>
 
     <!-- Stats Section -->
+    {% assign current_month = site.time | date: "%Y-%m" %}
+    {% assign this_month_count = 0 %}
+    {% for post in site.posts %}
+      {% assign post_month = post.date | date: "%Y-%m" %}
+      {% if post_month == current_month %}
+        {% assign this_month_count = this_month_count | plus: 1 %}
+      {% endif %}
+    {% endfor %}
     <section class="mb-8">
       <h2 class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-4">STATS</h2>
       <div class="grid grid-cols-3 gap-4">
@@ -53,15 +61,48 @@ permalink: /about/
           <div class="text-sm text-gray-500">Total Solved</div>
         </div>
         <div class="text-center p-4 rounded-lg bg-gray-50">
-          <div class="text-2xl font-bold text-green-600">4</div>
+          <div class="text-2xl font-bold text-green-600">{{ this_month_count }}</div>
           <div class="text-sm text-gray-500">This Month</div>
         </div>
         <div class="text-center p-4 rounded-lg bg-gray-50">
-          <div class="text-2xl font-bold text-blue-600">🔥</div>
-          <div class="text-sm text-gray-500">Streak</div>
+          <div class="text-2xl font-bold text-blue-600" id="streak-count">0</div>
+          <div class="text-sm text-gray-500">Day Streak</div>
         </div>
       </div>
     </section>
+    
+    <script>
+    // Calculate streak
+    const postDates = [
+      {% for post in site.posts %}"{{ post.date | date: '%Y-%m-%d' }}"{% unless forloop.last %},{% endunless %}{% endfor %}
+    ];
+    
+    function calculateStreak() {
+      const uniqueDates = [...new Set(postDates)].sort().reverse();
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      
+      let streak = 0;
+      let checkDate = new Date(today);
+      
+      for (let i = 0; i < 365; i++) {
+        const dateStr = checkDate.toISOString().split('T')[0];
+        if (uniqueDates.includes(dateStr)) {
+          streak++;
+          checkDate.setDate(checkDate.getDate() - 1);
+        } else if (i === 0) {
+          // Today has no post, check from yesterday
+          checkDate.setDate(checkDate.getDate() - 1);
+        } else {
+          break;
+        }
+      }
+      
+      document.getElementById('streak-count').textContent = streak > 0 ? streak + '🔥' : '0';
+    }
+    
+    document.addEventListener('DOMContentLoaded', calculateStreak);
+    </script>
 
     <!-- Links Section -->
     <section>
