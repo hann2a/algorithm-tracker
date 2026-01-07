@@ -3,3 +3,6 @@ baseurl: "/algorithm-tracker"
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+
+include:
+  - assets/css/output.css
