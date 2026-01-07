@@ -1,5 +1,4 @@
 title: Algorithm Tracker
-theme: minima
 baseurl: "/algorithm-tracker"
 plugins:
   - jekyll-feed
