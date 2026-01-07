@@ -1,9 +1,10 @@
 ---
-title: "[백준 1234] 배열 회전"
+title: "[BOJ 1234] Array Rotation"
 date: 2026-01-07
-type: "구현"
+type: "Implementation"
+difficulty: "medium"
 link: "https://boj.kr/1234"
-summary: "배열을 시계 방향으로 회전시키는 구현 문제. deque를 써서 풀었다."
+summary: "Rotate an array clockwise. Solved using deque."
 layout: post
 ---
 

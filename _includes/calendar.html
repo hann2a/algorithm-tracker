@@ -1,4 +1,132 @@
 <!-- _includes/calendar.html -->
-<div class="text-gray-500 text-sm text-center">
-  <p>This is a placeholder calendar.</p>
+{% assign current_month = site.time | date: "%Y-%m" %}
+{% assign current_year = site.time | date: "%Y" %}
+{% assign current_month_num = site.time | date: "%m" | plus: 0 %}
+{% assign current_day = site.time | date: "%d" | plus: 0 %}
+{% assign month_names = "January,February,March,April,May,June,July,August,September,October,November,December" | split:
+"," %}
+{% assign month_name = month_names[current_month_num | minus: 1] %}
+
+<!-- Collect posts for current month -->
+{% assign month_posts = "" | split: "" %}
+{% for post in site.posts %}
+{% assign post_month = post.date | date: "%Y-%m" %}
+{% if post_month == current_month %}
+{% assign month_posts = month_posts | push: post %}
+{% endif %}
+{% endfor %}
+
+<div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-8">
+  <!-- Calendar Header -->
+  <div class="flex items-center justify-between mb-8">
+    <h2 class="text-2xl font-bold text-gray-900">{{ month_name }} {{ current_year }}</h2>
+    <div class="flex items-center gap-2">
+      <button class="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-gray-600 transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+          stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      <button class="p-2 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-gray-600 transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+          stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Calendar Grid -->
+  <div class="grid grid-cols-7 gap-2">
+    <!-- Weekday Headers -->
+    <div class="text-center text-sm font-medium text-gray-400 py-3">Sun</div>
+    <div class="text-center text-sm font-medium text-gray-400 py-3">Mon</div>
+    <div class="text-center text-sm font-medium text-gray-400 py-3">Tue</div>
+    <div class="text-center text-sm font-medium text-gray-400 py-3">Wed</div>
+    <div class="text-center text-sm font-medium text-gray-400 py-3">Thu</div>
+    <div class="text-center text-sm font-medium text-gray-400 py-3">Fri</div>
+    <div class="text-center text-sm font-medium text-gray-400 py-3">Sat</div>
+
+    <!-- Generate days for January 2026 (starts on Thursday = 4 empty cells) -->
+    <!-- Empty cells before first day -->
+    <div class="aspect-square"></div>
+    <div class="aspect-square"></div>
+    <div class="aspect-square"></div>
+    <div class="aspect-square"></div>
+
+    {% for day in (1..31) %}
+    {% assign day_str = day | prepend: "0" | slice: -2, 2 %}
+    {% assign full_date = current_year | append: "-" | append: current_month_num | prepend: "0" | slice: -2, 2 |
+    prepend: current_year | append: "-01-" | append: day_str %}
+
+    {% assign has_post = false %}
+    {% assign post_title = "" %}
+    {% assign post_summary = "" %}
+    {% assign post_url = "" %}
+    {% assign post_difficulty = "easy" %}
+
+    {% for post in month_posts %}
+    {% assign post_day = post.date | date: "%d" | plus: 0 %}
+    {% if post_day == day %}
+    {% assign has_post = true %}
+    {% assign post_title = post.title %}
+    {% assign post_summary = post.summary | default: post.type %}
+    {% assign post_url = post.url | prepend: site.baseurl %}
+    {% assign post_difficulty = post.difficulty | default: "easy" %}
+    {% endif %}
+    {% endfor %}
+
+    {% if day == current_day %}
+    <!-- Today -->
+    <div
+      class="calendar-cell aspect-square rounded-lg border-2 border-blue-500 bg-blue-50 flex items-center justify-center relative">
+      <span class="text-sm font-bold text-blue-600">{{ day }}</span>
+    </div>
+    {% elsif has_post %}
+    <!-- Day with post -->
+    <a href="{{ post_url }}"
+      class="calendar-cell aspect-square rounded-lg border border-gray-100 bg-white hover:bg-gray-50 flex items-center justify-center relative cursor-pointer transition-colors group"
+      data-title="{{ post_title }}" data-summary="{{ post_summary }}">
+      <span class="text-sm font-medium text-gray-700">{{ day }}</span>
+      {% if post_difficulty == "hard" %}
+      <span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-red-500"></span>
+      {% elsif post_difficulty == "medium" %}
+      <span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-yellow-400"></span>
+      {% else %}
+      <span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-blue-500"></span>
+      {% endif %}
+
+      <!-- Tooltip -->
+      <div
+        class="tooltip absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-3 bg-gray-900 text-white text-xs rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-10 pointer-events-none">
+        <div class="font-medium truncate">{{ post_title }}</div>
+        <div class="text-gray-400 mt-1">{{ post_summary | truncate: 40 }}</div>
+        <div class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
+      </div>
+    </a>
+    {% else %}
+    <!-- Empty day -->
+    <div
+      class="calendar-cell aspect-square rounded-lg border border-gray-100 bg-white flex items-center justify-center relative">
+      <span class="text-sm font-medium text-gray-400">{{ day }}</span>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+
+  <!-- Legend -->
+  <div class="flex items-center justify-center gap-8 mt-8 pt-6 border-t border-gray-100">
+    <div class="flex items-center gap-2">
+      <span class="w-2.5 h-2.5 rounded-full bg-red-500"></span>
+      <span class="text-sm text-gray-500">Hard</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <span class="w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
+      <span class="text-sm text-gray-500">Medium</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+      <span class="text-sm text-gray-500">Easy</span>
+    </div>
+  </div>
 </div>
