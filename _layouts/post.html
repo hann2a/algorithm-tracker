@@ -2,9 +2,54 @@
 layout: default
 ---
 
-<article class="prose max-w-3xl">
-  <h1>{{ page.title }}</h1>
-  <p class="text-sm text-gray-500">{{ page.date | date: "%Y-%m-%d" }} · {{ page.type }}</p>
-  <p><a href="{{ page.link }}" class="text-blue-600 underline">🔗 문제 링크</a></p>
-  {{ content }}
-</article>
+<div class="max-w-4xl mx-auto py-12 px-6">
+  <!-- Back Button -->
+  <a href="{{ site.baseurl }}/" class="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-8">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+    </svg>
+    <span class="text-sm font-medium">Back</span>
+  </a>
+
+  <!-- Content Card -->
+  <article class="bg-white rounded-2xl border border-gray-100 shadow-sm p-8">
+    <!-- Header -->
+    <header class="mb-8">
+      <h1 class="text-3xl font-bold text-gray-900 tracking-tight mb-3">{{ page.title }}</h1>
+      <div class="flex items-center gap-3 text-sm text-gray-500">
+        <span class="inline-flex items-center gap-1.5">
+          <span class="w-2 h-2 bg-red-500 rounded-full"></span>
+          <span class="font-medium">{{ page.type }}</span>
+        </span>
+        <span>·</span>
+        <span>{{ page.date | date: "%Y-%m-%d" }}</span>
+      </div>
+    </header>
+
+    <!-- Link Section -->
+    {% if page.link %}
+    <section class="mb-8">
+      <h2 class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">LINK</h2>
+      <a href="{{ page.link }}" target="_blank" class="inline-flex items-center gap-1.5 text-blue-600 hover:underline">
+        <span>{{ page.link }}</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+        </svg>
+      </a>
+    </section>
+    {% endif %}
+
+    <!-- Summary Section -->
+    {% if page.summary %}
+    <section class="mb-8">
+      <h2 class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">SUMMARY</h2>
+      <p class="text-base leading-relaxed text-gray-600">{{ page.summary }}</p>
+    </section>
+    {% endif %}
+
+    <!-- Main Content -->
+    <section class="post-content">
+      {{ content }}
+    </section>
+  </article>
+</div>
