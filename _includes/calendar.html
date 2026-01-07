@@ -5,9 +5,8 @@
 {% assign current_year = now | date: "%Y" %}
 {% assign current_month = now | date: "%m" | plus: 0 %}
 {% assign current_day = now | date: "%d" | plus: 0 %}
+{% assign month_name = now | date: "%B" %}
 
-{% assign month_names = "January,February,March,April,May,June,July,August,September,October,November,December" | split: "," %}
-{% assign month_name = month_names[current_month | minus: 1] %}
 
 <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-8">
   <!-- Calendar Header -->
