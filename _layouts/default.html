@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ page.title | default: "AlgoTracker" }}</title>
+    {% include head.html %}
+  </head>
+  <body class="flex min-h-screen bg-gray-50">
+    {% include sidebar.html %}
+    <main class="flex-1 p-6 ml-64">
+      {{ content }}
+    </main>
+  </body>
+</html>

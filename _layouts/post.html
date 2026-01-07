@@ -1,0 +1,10 @@
+---
+layout: default
+---
+
+<article class="prose max-w-3xl">
+  <h1>{{ page.title }}</h1>
+  <p class="text-sm text-gray-500">{{ page.date | date: "%Y-%m-%d" }} · {{ page.type }}</p>
+  <p><a href="{{ page.link }}" class="text-blue-600 underline">🔗 문제 링크</a></p>
+  {{ content }}
+</article>
