@@ -16,11 +16,22 @@
   <body class="flex min-h-screen bg-gray-50">
     <aside class="fixed left-0 top-0 h-screen w-64 bg-white border-r border-gray-200 flex flex-col p-6">
   <!-- Logo -->
-  <div class="mb-10">
+  <div class="mb-6">
     <a href="/algorithm-tracker/" class="text-xl font-bold text-gray-900 tracking-tight">
       AlgoTracker
     </a>
   </div>
+
+  <!-- Search Button -->
+  <button onclick="openSearchModal()"
+    class="flex items-center gap-3 w-full px-3 py-2 mb-6 text-sm text-gray-400 bg-gray-50 border border-gray-100 rounded-lg hover:bg-gray-100 hover:text-gray-600 transition-all">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+      stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+    </svg>
+    <span>Search...</span>
+    <span class="ml-auto text-xs bg-gray-200 px-1.5 py-0.5 rounded">⌘K</span>
+  </button>
 
   <!-- Navigation -->
   <nav class="flex flex-col gap-1">
@@ -52,6 +63,166 @@
     </a>
   </nav>
 </aside>
+
+<!-- Search Modal -->
+<div id="search-modal-overlay"
+  class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-200"
+  onclick="closeSearchModal()"></div>
+<div id="search-modal" class="fixed inset-0 z-50 hidden items-start justify-center pt-[15vh] px-4">
+  <div id="search-modal-content"
+    class="bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden transform scale-95 opacity-0 transition-all duration-200"
+    onclick="event.stopPropagation()">
+    <!-- Search Input -->
+    <div class="flex items-center gap-3 p-4 border-b border-gray-100">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24"
+        stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+      </svg>
+      <input type="text" id="search-modal-input" placeholder="Search problems..."
+        class="flex-1 text-base outline-none bg-transparent placeholder-gray-400" autocomplete="off">
+      <button onclick="closeSearchModal()"
+        class="p-1.5 rounded-lg hover:bg-gray-100 text-gray-400 hover:text-gray-600 transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+          stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Results -->
+    <div id="search-modal-results" class="max-h-80 overflow-y-auto">
+      <div class="p-6 text-center text-sm text-gray-400">
+        Type to search...
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Search Script -->
+<script>
+  const allPosts = [
+    
+  {
+    title: "[BOJ 1234] Array Rotation",
+      summary: "Rotate an array clockwise. Solved using deque.",
+        difficulty: "medium",
+          date: "Jan 07, 2026",
+            url: "/algorithm-tracker/2026/01/07/array-rotation/"
+  } , 
+  
+  {
+    title: "[BOJ 1008] A/B",
+      summary: "Read two integers A and B, output A/B. Error tolerance up to 10^-9",
+        difficulty: "hard",
+          date: "Jan 05, 2026",
+            url: "/algorithm-tracker/2026/01/05/a-div-b/"
+  } , 
+  
+  {
+    title: "[BOJ 2557] Hello World",
+      summary: "Basic problem to print Hello World!",
+        difficulty: "easy",
+          date: "Jan 03, 2026",
+            url: "/algorithm-tracker/2026/01/03/hello-world/"
+  } , 
+  
+  {
+    title: "[BOJ 1000] A+B",
+      summary: "Read two integers A and B, then output A+B",
+        difficulty: "easy",
+          date: "Jan 01, 2026",
+            url: "/algorithm-tracker/2026/01/01/a-plus-b/"
+  } 
+  
+];
+
+  const diffColors = { 'hard': 'bg-red-500', 'medium': 'bg-yellow-400', 'easy': 'bg-blue-500' };
+
+  function openSearchModal() {
+    const overlay = document.getElementById('search-modal-overlay');
+    const modal = document.getElementById('search-modal');
+    const content = document.getElementById('search-modal-content');
+    const input = document.getElementById('search-modal-input');
+
+    overlay.classList.remove('hidden');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+
+    requestAnimationFrame(() => {
+      overlay.classList.remove('opacity-0');
+      content.classList.remove('scale-95', 'opacity-0');
+      content.classList.add('scale-100', 'opacity-100');
+      input.focus();
+    });
+
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSearchModal() {
+    const overlay = document.getElementById('search-modal-overlay');
+    const modal = document.getElementById('search-modal');
+    const content = document.getElementById('search-modal-content');
+    const input = document.getElementById('search-modal-input');
+    const results = document.getElementById('search-modal-results');
+
+    overlay.classList.add('opacity-0');
+    content.classList.remove('scale-100', 'opacity-100');
+    content.classList.add('scale-95', 'opacity-0');
+
+    setTimeout(() => {
+      overlay.classList.add('hidden');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      input.value = '';
+      results.innerHTML = '<div class="p-6 text-center text-sm text-gray-400">Type to search...</div>';
+    }, 200);
+
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('search-modal-input').addEventListener('input', (e) => {
+    const query = e.target.value.toLowerCase().trim();
+    const results = document.getElementById('search-modal-results');
+
+    if (query.length === 0) {
+      results.innerHTML = '<div class="p-6 text-center text-sm text-gray-400">Type to search...</div>';
+      return;
+    }
+
+    const filtered = allPosts.filter(p =>
+      p.title.toLowerCase().includes(query) ||
+      p.summary.toLowerCase().includes(query)
+    );
+
+    if (filtered.length === 0) {
+      results.innerHTML = '<div class="p-6 text-center text-sm text-gray-400">No results found</div>';
+    } else {
+      results.innerHTML = filtered.map(p => `
+      <a href="${p.url}" class="flex items-center gap-3 p-4 hover:bg-gray-50 transition-colors border-b border-gray-50 last:border-0">
+        <span class="w-2.5 h-2.5 rounded-full ${diffColors[p.difficulty]} flex-shrink-0"></span>
+        <div class="flex-1 min-w-0">
+          <div class="text-sm font-medium text-gray-900 truncate">${p.title}</div>
+          <div class="text-xs text-gray-400 mt-0.5">${p.summary.substring(0, 50)}${p.summary.length > 50 ? '...' : ''}</div>
+        </div>
+        <div class="text-xs text-gray-300">${p.date}</div>
+      </a>
+    `).join('');
+    }
+  });
+
+  // Keyboard shortcuts
+  document.addEventListener('keydown', (e) => {
+    // Cmd/Ctrl + K to open
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      openSearchModal();
+    }
+    // ESC to close
+    if (e.key === 'Escape') {
+      closeSearchModal();
+    }
+  });
+</script>
     <main class="flex-1 p-6 ml-64">
       <div class="max-w-4xl mx-auto py-12 px-6">
   <!-- Back Button -->
