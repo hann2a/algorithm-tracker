@@ -1,6 +1,7 @@
 ---
 layout: default
 title: "About"
+permalink: /about/
 ---
 
 <div class="max-w-2xl mx-auto py-12 px-6">
@@ -52,7 +53,7 @@ title: "About"
           <div class="text-sm text-gray-500">Total Solved</div>
         </div>
         <div class="text-center p-4 rounded-lg bg-gray-50">
-          <div class="text-2xl font-bold text-green-600">6</div>
+          <div class="text-2xl font-bold text-green-600">4</div>
           <div class="text-sm text-gray-500">This Month</div>
         </div>
         <div class="text-center p-4 rounded-lg bg-gray-50">

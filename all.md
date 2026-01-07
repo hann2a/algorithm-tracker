@@ -1,6 +1,7 @@
 ---
 layout: default
 title: "All"
+permalink: /all/
 ---
 
 <div class="max-w-4xl mx-auto py-8 px-6">
@@ -17,9 +18,8 @@ title: "All"
       <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
         <h3 class="text-xl font-bold text-gray-900 mb-6">{{ month_name }} {{ year }}</h3>
         
-        <!-- Mini Calendar Grid -->
-        <div class="grid grid-cols-7 gap-1 text-center">
-          <!-- Weekday Headers -->
+        <!-- Calendar Grid Header -->
+        <div class="grid grid-cols-7 gap-1 text-center mb-2">
           <div class="text-xs font-medium text-gray-400 py-2">S</div>
           <div class="text-xs font-medium text-gray-400 py-2">M</div>
           <div class="text-xs font-medium text-gray-400 py-2">T</div>
@@ -27,6 +27,38 @@ title: "All"
           <div class="text-xs font-medium text-gray-400 py-2">T</div>
           <div class="text-xs font-medium text-gray-400 py-2">F</div>
           <div class="text-xs font-medium text-gray-400 py-2">S</div>
+        </div>
+        
+        <!-- Mini Calendar Grid (simplified) -->
+        <div class="grid grid-cols-7 gap-1">
+          <!-- Jan 2026 starts on Wednesday -->
+          <div class="aspect-square"></div>
+          <div class="aspect-square"></div>
+          <div class="aspect-square"></div>
+          {% for day in (1..31) %}
+            {% assign has_post = false %}
+            {% assign post_difficulty = "none" %}
+            {% for post in month.items %}
+              {% assign post_day = post.date | date: "%d" | plus: 0 %}
+              {% if post_day == day %}
+                {% assign has_post = true %}
+                {% assign post_difficulty = post.difficulty | default: "easy" %}
+              {% endif %}
+            {% endfor %}
+            
+            <div class="aspect-square rounded border border-gray-100 bg-white flex items-center justify-center relative text-xs">
+              <span class="{% if has_post %}text-gray-700 font-medium{% else %}text-gray-400{% endif %}">{{ day }}</span>
+              {% if has_post %}
+                {% if post_difficulty == "hard" %}
+                  <span class="absolute top-0.5 right-0.5 w-1.5 h-1.5 rounded-full bg-red-500"></span>
+                {% elsif post_difficulty == "medium" %}
+                  <span class="absolute top-0.5 right-0.5 w-1.5 h-1.5 rounded-full bg-yellow-400"></span>
+                {% else %}
+                  <span class="absolute top-0.5 right-0.5 w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                {% endif %}
+              {% endif %}
+            </div>
+          {% endfor %}
         </div>
         
         <!-- Posts List for this month -->
