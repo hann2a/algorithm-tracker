@@ -31,8 +31,19 @@ jobs:
           npm install
           npx tailwindcss -i ./assets/css/index.css -o ./assets/css/output.css --minify
 
+      - name: Verify Tailwind output
+        run: |
+          echo "=== Checking output.css ==="
+          ls -la ./assets/css/
+          head -20 ./assets/css/output.css
+
       - name: Build Jekyll site
         run: bundle exec jekyll build
+
+      - name: Verify _site contents
+        run: |
+          echo "=== Checking _site/assets/css ==="
+          ls -la ./_site/assets/css/ || echo "CSS folder not found in _site"
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
