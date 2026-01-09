@@ -1,4 +1,42 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/algorithm-tracker/feed.xml" rel="self" type="application/atom+xml" /><link href="/algorithm-tracker/" rel="alternate" type="text/html" /><updated>2026-01-08T01:09:50+00:00</updated><id>/algorithm-tracker/feed.xml</id><title type="html">Algorithm Tracker</title><entry><title type="html">[SWEA 4615] 재미있는 오셀로 게임</title><link href="/algorithm-tracker/2026/01/08/4615-swea/" rel="alternate" type="text/html" title="[SWEA 4615] 재미있는 오셀로 게임" /><published>2026-01-08T00:00:00+00:00</published><updated>2026-01-08T00:00:00+00:00</updated><id>/algorithm-tracker/2026/01/08/4615-swea</id><content type="html" xml:base="/algorithm-tracker/2026/01/08/4615-swea/"><![CDATA[<h2 id="code">CODE</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/algorithm-tracker/feed.xml" rel="self" type="application/atom+xml" /><link href="/algorithm-tracker/" rel="alternate" type="text/html" /><updated>2026-01-09T06:05:51+00:00</updated><id>/algorithm-tracker/feed.xml</id><title type="html">Algorithm Tracker</title><entry><title type="html">[SWEA 4615] 재미있는 오셀로 게임</title><link href="/algorithm-tracker/2026/01/09/1954-swea/" rel="alternate" type="text/html" title="[SWEA 4615] 재미있는 오셀로 게임" /><published>2026-01-09T00:00:00+00:00</published><updated>2026-01-09T00:00:00+00:00</updated><id>/algorithm-tracker/2026/01/09/1954-swea</id><content type="html" xml:base="/algorithm-tracker/2026/01/09/1954-swea/"><![CDATA[<h2 id="code">CODE</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sh">"""</span><span class="s">
+패턴 찾기 - 시계 방향 
+방향 전환 조건: 벽이거나, 이미 숫자가 채워진 칸 
+</span><span class="sh">"""</span>
+<span class="kn">import</span> <span class="n">sys</span>
+
+<span class="n">sys</span><span class="p">.</span><span class="n">stdin</span> <span class="o">=</span> <span class="nf">open</span><span class="p">(</span><span class="sh">'</span><span class="s">input.txt</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">r</span><span class="sh">'</span><span class="p">)</span>
+
+<span class="n">T</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="nf">input</span><span class="p">().</span><span class="nf">strip</span><span class="p">())</span>
+
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="nf">input</span><span class="p">().</span><span class="nf">strip</span><span class="p">())</span>
+
+    <span class="n">arr</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">N</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
+
+    <span class="c1"># 오른쪽, 아래, 왼쪽, 위 
+</span>    <span class="n">dr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">dc</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># 현재 위치와 방향 
+</span>    <span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span> 
+
+    <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="o">*</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">arr</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">num</span> 
+
+        <span class="n">nr</span><span class="p">,</span> <span class="n">nc</span> <span class="o">=</span> <span class="n">r</span> <span class="o">+</span> <span class="n">dr</span><span class="p">[</span><span class="n">d</span><span class="p">],</span> <span class="n">c</span> <span class="o">+</span> <span class="n">dc</span><span class="p">[</span><span class="n">d</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">nr</span> <span class="o">&lt;</span> <span class="n">N</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">nc</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">)</span> <span class="ow">or</span> <span class="n">arr</span><span class="p">[</span><span class="n">nr</span><span class="p">][</span><span class="n">nc</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="p">(</span><span class="n">d</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">4</span>
+            <span class="n">nr</span><span class="p">,</span> <span class="n">nc</span> <span class="o">=</span> <span class="n">r</span> <span class="o">+</span> <span class="n">dr</span><span class="p">[</span><span class="n">d</span><span class="p">],</span> <span class="n">c</span> <span class="o">+</span> <span class="n">dc</span><span class="p">[</span><span class="n">d</span><span class="p">]</span>
+        
+        <span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">nr</span><span class="p">,</span> <span class="n">nc</span> 
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="s">#</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="sh">'</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="o">*</span><span class="n">row</span><span class="p">)</span>
+</code></pre></div></div>]]></content><author><name></name></author><summary type="html"><![CDATA[CODE]]></summary></entry><entry><title type="html">[SWEA 4615] 재미있는 오셀로 게임</title><link href="/algorithm-tracker/2026/01/08/4615-swea/" rel="alternate" type="text/html" title="[SWEA 4615] 재미있는 오셀로 게임" /><published>2026-01-08T00:00:00+00:00</published><updated>2026-01-08T00:00:00+00:00</updated><id>/algorithm-tracker/2026/01/08/4615-swea</id><content type="html" xml:base="/algorithm-tracker/2026/01/08/4615-swea/"><![CDATA[<h2 id="code">CODE</h2>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">T</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="nf">input</span><span class="p">().</span><span class="nf">strip</span><span class="p">())</span>
 

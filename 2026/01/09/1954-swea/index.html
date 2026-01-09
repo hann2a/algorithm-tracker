@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>[BOJ 1234] Array Rotation</title>
+    <title>[SWEA 4615] 재미있는 오셀로 게임</title>
     <!-- _includes/head.html -->
 
 <!-- Tailwind Build Output CSS -->
@@ -253,14 +253,14 @@
   <article class="bg-white rounded-2xl border border-gray-100 shadow-sm p-8">
     <!-- Header -->
     <header class="mb-8">
-      <h1 class="text-3xl font-bold text-gray-900 tracking-tight mb-3">[BOJ 1234] Array Rotation</h1>
+      <h1 class="text-3xl font-bold text-gray-900 tracking-tight mb-3">[SWEA 4615] 재미있는 오셀로 게임</h1>
       <div class="flex items-center gap-3 text-sm text-gray-500">
         <span class="inline-flex items-center gap-1.5">
           <span class="w-2 h-2 bg-red-500 rounded-full"></span>
-          <span class="font-medium">Implementation</span>
+          <span class="font-medium">simulation</span>
         </span>
         <span>·</span>
-        <span>2026-01-07</span>
+        <span>2026-01-09</span>
       </div>
     </header>
 
@@ -268,8 +268,8 @@
     
     <section class="mb-8">
       <h2 class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">LINK</h2>
-      <a href="https://boj.kr/1234" target="_blank" class="inline-flex items-center gap-1.5 text-blue-600 hover:underline">
-        <span>https://boj.kr/1234</span>
+      <a href="https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV5PobmqAPoDFAUq" target="_blank" class="inline-flex items-center gap-1.5 text-blue-600 hover:underline">
+        <span>https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV5PobmqAPoDFAUq</span>
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
         </svg>
@@ -281,7 +281,7 @@
     
     <section class="mb-8">
       <h2 class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">SUMMARY</h2>
-      <p class="text-base leading-relaxed text-gray-600">Rotate an array clockwise. Solved using deque.</p>
+      <p class="text-base leading-relaxed text-gray-600">시뮬레이션 더 기본...</p>
     </section>
     
 
@@ -289,13 +289,44 @@
     <section class="post-content">
       <h2 id="code">CODE</h2>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sh">"""</span><span class="s">
+패턴 찾기 - 시계 방향 
+방향 전환 조건: 벽이거나, 이미 숫자가 채워진 칸 
+</span><span class="sh">"""</span>
+<span class="kn">import</span> <span class="n">sys</span>
 
-<span class="k">def</span> <span class="nf">rotate</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-    <span class="n">d</span> <span class="o">=</span> <span class="nf">deque</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
-    <span class="n">d</span><span class="p">.</span><span class="nf">rotate</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
-    <span class="k">return</span> <span class="nf">list</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="n">sys</span><span class="p">.</span><span class="n">stdin</span> <span class="o">=</span> <span class="nf">open</span><span class="p">(</span><span class="sh">'</span><span class="s">input.txt</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">r</span><span class="sh">'</span><span class="p">)</span>
+
+<span class="n">T</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="nf">input</span><span class="p">().</span><span class="nf">strip</span><span class="p">())</span>
+
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="nf">input</span><span class="p">().</span><span class="nf">strip</span><span class="p">())</span>
+
+    <span class="n">arr</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">N</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
+
+    <span class="c1"># 오른쪽, 아래, 왼쪽, 위 
+</span>    <span class="n">dr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">dc</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># 현재 위치와 방향 
+</span>    <span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span> 
+
+    <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="o">*</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">arr</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">num</span> 
+
+        <span class="n">nr</span><span class="p">,</span> <span class="n">nc</span> <span class="o">=</span> <span class="n">r</span> <span class="o">+</span> <span class="n">dr</span><span class="p">[</span><span class="n">d</span><span class="p">],</span> <span class="n">c</span> <span class="o">+</span> <span class="n">dc</span><span class="p">[</span><span class="n">d</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">nr</span> <span class="o">&lt;</span> <span class="n">N</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">nc</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">)</span> <span class="ow">or</span> <span class="n">arr</span><span class="p">[</span><span class="n">nr</span><span class="p">][</span><span class="n">nc</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="p">(</span><span class="n">d</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">4</span>
+            <span class="n">nr</span><span class="p">,</span> <span class="n">nc</span> <span class="o">=</span> <span class="n">r</span> <span class="o">+</span> <span class="n">dr</span><span class="p">[</span><span class="n">d</span><span class="p">],</span> <span class="n">c</span> <span class="o">+</span> <span class="n">dc</span><span class="p">[</span><span class="n">d</span><span class="p">]</span>
+        
+        <span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">nr</span><span class="p">,</span> <span class="n">nc</span> 
+    
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="s">#</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="sh">'</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="o">*</span><span class="n">row</span><span class="p">)</span>
 </code></pre></div></div>
+
 
     </section>
   </article>
