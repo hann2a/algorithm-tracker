@@ -1,4 +1,38 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/algorithm-tracker/feed.xml" rel="self" type="application/atom+xml" /><link href="/algorithm-tracker/" rel="alternate" type="text/html" /><updated>2026-01-09T06:09:02+00:00</updated><id>/algorithm-tracker/feed.xml</id><title type="html">Algorithm Tracker</title><entry><title type="html">[SWEA 1954] 달팽이 숫자</title><link href="/algorithm-tracker/2026/01/09/1954-swea/" rel="alternate" type="text/html" title="[SWEA 1954] 달팽이 숫자" /><published>2026-01-09T00:00:00+00:00</published><updated>2026-01-09T00:00:00+00:00</updated><id>/algorithm-tracker/2026/01/09/1954-swea</id><content type="html" xml:base="/algorithm-tracker/2026/01/09/1954-swea/"><![CDATA[<h2 id="code">CODE</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/algorithm-tracker/feed.xml" rel="self" type="application/atom+xml" /><link href="/algorithm-tracker/" rel="alternate" type="text/html" /><updated>2026-01-13T08:44:21+00:00</updated><id>/algorithm-tracker/feed.xml</id><title type="html">Algorithm Tracker</title><entry><title type="html">[SWEA 1210] Ladder1</title><link href="/algorithm-tracker/2026/01/13/1210-swea/" rel="alternate" type="text/html" title="[SWEA 1210] Ladder1" /><published>2026-01-13T00:00:00+00:00</published><updated>2026-01-13T00:00:00+00:00</updated><id>/algorithm-tracker/2026/01/13/1210-swea</id><content type="html" xml:base="/algorithm-tracker/2026/01/13/1210-swea/"><![CDATA[<h2 id="code">CODE</h2>
+
+<p>```python
+import sys
+sys.stdin = open(“input.txt”, “r”)</p>
+
+<p>T = 10
+for _ in range(T):
+    tc = int(input())
+    grid = [list(map(int, input().split())) for _ in range(100)]</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 2가 있는 시작 열 찾기 (맨 아래 행)
+r = 99
+c = grid[99].index(2)
+
+while r &gt; 0:
+    # 왼쪽으로 갈 수 있으면 끝까지 이동
+    if c - 1 &gt;= 0 and grid[r][c - 1] == 1:
+        while c - 1 &gt;= 0 and grid[r][c - 1] == 1:
+            c -= 1
+        r -= 1
+
+    # 오른쪽으로 갈 수 있으면 끝까지 이동
+    elif c + 1 &lt; 100 and grid[r][c + 1] == 1:
+        while c + 1 &lt; 100 and grid[r][c + 1] == 1:
+            c += 1
+        r -= 1
+
+    # 좌우가 막혀있으면 그냥 위로
+    else:
+        r -= 1
+
+print(f"#{tc} {c}")
+```
+</code></pre></div></div>]]></content><author><name></name></author><summary type="html"><![CDATA[CODE ```python import sys sys.stdin = open(“input.txt”, “r”) T = 10 for _ in range(T): tc = int(input()) grid = [list(map(int, input().split())) for _ in range(100)] # 2가 있는 시작 열 찾기 (맨 아래 행) r = 99 c = grid[99].index(2) while r &gt; 0: # 왼쪽으로 갈 수 있으면 끝까지 이동 if c - 1 &gt;= 0 and grid[r][c - 1] == 1: while c - 1 &gt;= 0 and grid[r][c - 1] == 1: c -= 1 r -= 1 # 오른쪽으로 갈 수 있으면 끝까지 이동 elif c + 1 &lt; 100 and grid[r][c + 1] == 1: while c + 1 &lt; 100 and grid[r][c + 1] == 1: c += 1 r -= 1 # 좌우가 막혀있으면 그냥 위로 else: r -= 1 print(f"#{tc} {c}") ```]]></summary></entry><entry><title type="html">[SWEA 1954] 달팽이 숫자</title><link href="/algorithm-tracker/2026/01/09/1954-swea/" rel="alternate" type="text/html" title="[SWEA 1954] 달팽이 숫자" /><published>2026-01-09T00:00:00+00:00</published><updated>2026-01-09T00:00:00+00:00</updated><id>/algorithm-tracker/2026/01/09/1954-swea</id><content type="html" xml:base="/algorithm-tracker/2026/01/09/1954-swea/"><![CDATA[<h2 id="code">CODE</h2>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sh">"""</span><span class="s">
 패턴 찾기 - 시계 방향 

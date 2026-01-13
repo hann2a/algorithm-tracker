@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>[BOJ 1000] A+B</title>
+    <title>[SWEA 1210] Ladder1</title>
     <!-- _includes/head.html -->
 
 <!-- Tailwind Build Output CSS -->
@@ -261,14 +261,14 @@
   <article class="bg-white rounded-2xl border border-gray-100 shadow-sm p-8">
     <!-- Header -->
     <header class="mb-8">
-      <h1 class="text-3xl font-bold text-gray-900 tracking-tight mb-3">[BOJ 1000] A+B</h1>
+      <h1 class="text-3xl font-bold text-gray-900 tracking-tight mb-3">[SWEA 1210] Ladder1</h1>
       <div class="flex items-center gap-3 text-sm text-gray-500">
         <span class="inline-flex items-center gap-1.5">
           <span class="w-2 h-2 bg-red-500 rounded-full"></span>
-          <span class="font-medium">Math</span>
+          <span class="font-medium">simulation</span>
         </span>
         <span>·</span>
-        <span>2026-01-01</span>
+        <span>2026-01-13</span>
       </div>
     </header>
 
@@ -276,8 +276,8 @@
     
     <section class="mb-8">
       <h2 class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">LINK</h2>
-      <a href="https://boj.kr/1000" target="_blank" class="inline-flex items-center gap-1.5 text-blue-600 hover:underline">
-        <span>https://boj.kr/1000</span>
+      <a href="https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV14ABYKADACFAYh" target="_blank" class="inline-flex items-center gap-1.5 text-blue-600 hover:underline">
+        <span>https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV14ABYKADACFAYh</span>
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
         </svg>
@@ -289,7 +289,7 @@
     
     <section class="mb-8">
       <h2 class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">SUMMARY</h2>
-      <p class="text-base leading-relaxed text-gray-600">Read two integers A and B, then output A+B</p>
+      <p class="text-base leading-relaxed text-gray-600">음...</p>
     </section>
     
 
@@ -297,8 +297,38 @@
     <section class="post-content">
       <h2 id="code">CODE</h2>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="nf">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nf">input</span><span class="p">().</span><span class="nf">split</span><span class="p">())</span>
-<span class="nf">print</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+<p>```python
+import sys
+sys.stdin = open(“input.txt”, “r”)</p>
+
+<p>T = 10
+for _ in range(T):
+    tc = int(input())
+    grid = [list(map(int, input().split())) for _ in range(100)]</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 2가 있는 시작 열 찾기 (맨 아래 행)
+r = 99
+c = grid[99].index(2)
+
+while r &gt; 0:
+    # 왼쪽으로 갈 수 있으면 끝까지 이동
+    if c - 1 &gt;= 0 and grid[r][c - 1] == 1:
+        while c - 1 &gt;= 0 and grid[r][c - 1] == 1:
+            c -= 1
+        r -= 1
+
+    # 오른쪽으로 갈 수 있으면 끝까지 이동
+    elif c + 1 &lt; 100 and grid[r][c + 1] == 1:
+        while c + 1 &lt; 100 and grid[r][c + 1] == 1:
+            c += 1
+        r -= 1
+
+    # 좌우가 막혀있으면 그냥 위로
+    else:
+        r -= 1
+
+print(f"#{tc} {c}")
+```
 </code></pre></div></div>
 
     </section>
