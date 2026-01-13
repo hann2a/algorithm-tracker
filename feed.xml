@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/algorithm-tracker/feed.xml" rel="self" type="application/atom+xml" /><link href="/algorithm-tracker/" rel="alternate" type="text/html" /><updated>2026-01-13T08:44:21+00:00</updated><id>/algorithm-tracker/feed.xml</id><title type="html">Algorithm Tracker</title><entry><title type="html">[SWEA 1210] Ladder1</title><link href="/algorithm-tracker/2026/01/13/1210-swea/" rel="alternate" type="text/html" title="[SWEA 1210] Ladder1" /><published>2026-01-13T00:00:00+00:00</published><updated>2026-01-13T00:00:00+00:00</updated><id>/algorithm-tracker/2026/01/13/1210-swea</id><content type="html" xml:base="/algorithm-tracker/2026/01/13/1210-swea/"><![CDATA[<h2 id="code">CODE</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/algorithm-tracker/feed.xml" rel="self" type="application/atom+xml" /><link href="/algorithm-tracker/" rel="alternate" type="text/html" /><updated>2026-01-13T08:46:30+00:00</updated><id>/algorithm-tracker/feed.xml</id><title type="html">Algorithm Tracker</title><entry><title type="html">[SWEA 1210] Ladder1</title><link href="/algorithm-tracker/2026/01/13/1210-swea/" rel="alternate" type="text/html" title="[SWEA 1210] Ladder1" /><published>2026-01-13T00:00:00+00:00</published><updated>2026-01-13T00:00:00+00:00</updated><id>/algorithm-tracker/2026/01/13/1210-swea</id><content type="html" xml:base="/algorithm-tracker/2026/01/13/1210-swea/"><![CDATA[<h2 id="code">CODE</h2>
 
-<p>```python
-import sys
+<p>```python</p>
+
+<p>import sys
 sys.stdin = open(“input.txt”, “r”)</p>
 
 <p>T = 10
