@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>[BOJ 1008] A/B</title>
+    <title>[SWEA 1211] Ladder2</title>
     <!-- _includes/head.html -->
 
 <!-- Tailwind Build Output CSS -->
@@ -269,14 +269,14 @@
   <article class="bg-white rounded-2xl border border-gray-100 shadow-sm p-8">
     <!-- Header -->
     <header class="mb-8">
-      <h1 class="text-3xl font-bold text-gray-900 tracking-tight mb-3">[BOJ 1008] A/B</h1>
+      <h1 class="text-3xl font-bold text-gray-900 tracking-tight mb-3">[SWEA 1211] Ladder2</h1>
       <div class="flex items-center gap-3 text-sm text-gray-500">
         <span class="inline-flex items-center gap-1.5">
           <span class="w-2 h-2 bg-red-500 rounded-full"></span>
-          <span class="font-medium">Math</span>
+          <span class="font-medium">simulation</span>
         </span>
         <span>·</span>
-        <span>2026-01-05</span>
+        <span>2026-01-14</span>
       </div>
     </header>
 
@@ -284,8 +284,8 @@
     
     <section class="mb-8">
       <h2 class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">LINK</h2>
-      <a href="https://boj.kr/1008" target="_blank" class="inline-flex items-center gap-1.5 text-blue-600 hover:underline">
-        <span>https://boj.kr/1008</span>
+      <a href="https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV14BgD6AEECFAYh" target="_blank" class="inline-flex items-center gap-1.5 text-blue-600 hover:underline">
+        <span>https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AV14BgD6AEECFAYh</span>
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
         </svg>
@@ -297,7 +297,7 @@
     
     <section class="mb-8">
       <h2 class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">SUMMARY</h2>
-      <p class="text-base leading-relaxed text-gray-600">Read two integers A and B, output A/B. Error tolerance up to 10^-9</p>
+      <p class="text-base leading-relaxed text-gray-600">!</p>
     </section>
     
 
@@ -305,8 +305,49 @@
     <section class="post-content">
       <h2 id="code">CODE</h2>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="nf">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nf">input</span><span class="p">().</span><span class="nf">split</span><span class="p">())</span>
-<span class="nf">print</span><span class="p">(</span><span class="n">a</span> <span class="o">/</span> <span class="n">b</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">import</span> <span class="n">sys</span>
+
+<span class="n">sys</span><span class="p">.</span><span class="n">stdin</span> <span class="o">=</span> <span class="nf">open</span><span class="p">(</span><span class="sh">'</span><span class="s">input.txt</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">r</span><span class="sh">'</span><span class="p">)</span>
+
+<span class="n">T</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="k">def</span> <span class="nf">measure_lenth</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">startpoint</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">startpoint</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># 좌우 이동 횟수
+</span>
+    <span class="k">while</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">99</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">arr</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">while</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">arr</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">y</span> <span class="o">-=</span> <span class="mi">1</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># 왼쪽 이동 카운트
+</span>
+        <span class="k">elif</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="mi">100</span> <span class="ow">and</span> <span class="n">arr</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">while</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="mi">100</span> <span class="ow">and</span> <span class="n">arr</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">y</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># 오른쪽 이동 카운트
+</span>
+        <span class="n">x</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># 매 반복마다 무조건 아래로
+</span>
+    <span class="k">return</span> <span class="n">count</span>
+
+
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">num</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="nf">input</span><span class="p">())</span>
+    <span class="n">arr</span> <span class="o">=</span> <span class="p">[</span><span class="nf">list</span><span class="p">(</span><span class="nf">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nf">input</span><span class="p">().</span><span class="nf">split</span><span class="p">()))</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)]</span>
+
+    <span class="n">shortest_long</span> <span class="o">=</span> <span class="nf">float</span><span class="p">(</span><span class="sh">'</span><span class="s">inf</span><span class="sh">'</span><span class="p">)</span>
+    <span class="n">result_y</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># 가장 짧은 경로의 시작 위치
+</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">length</span> <span class="o">=</span> <span class="nf">measure_lenth</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">length</span> <span class="o">&lt;</span> <span class="n">shortest_long</span><span class="p">:</span>
+                <span class="n">shortest_long</span> <span class="o">=</span> <span class="n">length</span>
+                <span class="n">result_y</span> <span class="o">=</span> <span class="n">i</span>  <span class="c1"># 시작 위치 저장
+</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="s">#</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s"> </span><span class="si">{</span><span class="n">result_y</span><span class="si">}</span><span class="sh">'</span><span class="p">)</span>
+
 </code></pre></div></div>
 
     </section>
